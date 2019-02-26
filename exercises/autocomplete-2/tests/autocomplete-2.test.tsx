@@ -2,12 +2,13 @@ import * as React from 'react';
 import { PlaceSearchResultList } from '../src/place-search-result-list';
 import * as renderer from 'react-test-renderer';
 import { PlaceDetails } from '../src/utils/places';
+import { IAppState } from '../src/app';
 
 let hasStudentSolution: boolean = true;
 
 hasStudentSolution =
-  JSON.stringify(renderer.create(<PlaceSearchResultList />).toJSON()) !==
-  JSON.stringify({ type: 'pre', props: {}, children: ['{"0":{},"1":{}}'] });
+  JSON.stringify(renderer.create(<PlaceSearchResultList {...{} as IAppState} />).toJSON())
+  !== JSON.stringify({ type: 'pre', props: {}, children: ['{"0":{},"1":{}}'] });
 
 if (hasStudentSolution) {
   it('PlaceSearchResultList renders correctly for "in progress" state', () => {

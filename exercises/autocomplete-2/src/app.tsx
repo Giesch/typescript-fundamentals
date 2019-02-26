@@ -2,10 +2,10 @@ import * as React from 'react';
 import { PlaceSearchResultList } from './place-search-result-list';
 import { PlaceDetails, PlaceSummary, fetchPlaceSummaries, fetchPlaceDetails } from './utils/places';
 
-interface IAppState {
+export interface IAppState {
   results: PlaceDetails[];
   inProgress: boolean;
-  term: string; 
+  term: string;
 }
 
 export class App extends React.Component<{}, IAppState> {
@@ -17,16 +17,19 @@ export class App extends React.Component<{}, IAppState> {
       inProgress: false
     };
   }
+
   async trySearch(search: string) {
     this.setState({ inProgress: true, term: search });
     let placeSummaries: PlaceSummary[] = await fetchPlaceSummaries(search);
     let results: PlaceDetails[] = await fetchPlaceDetails(placeSummaries.map(p => p.place_id));
     this.setState({ results, inProgress: false });
   }
+
   render() {
     console.log(this.state.results);
+    const childProps = { ...this.state, doSearch: (s: string) => this.trySearch(s) };
     return (
-      <PlaceSearchResultList />
+      <PlaceSearchResultList {...childProps} />
     );
   }
 };
