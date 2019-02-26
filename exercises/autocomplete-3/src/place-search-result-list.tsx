@@ -4,7 +4,7 @@ import { shortUrl } from './utils/string';
 import { PlaceDetails } from './utils/places';
 import { PlaceSearchResult } from './place-search-result';
 
-interface IPlaceSearchResultListProps {
+export interface IPlaceSearchResultListProps {
   results: PlaceDetails[];
   inProgress: boolean;
   term: string;
@@ -46,7 +46,7 @@ export const PlaceSearchResultList: React.SFC<IPlaceSearchResultListProps> =
     return (
       <div>
         <h2>Search for a place</h2>
-        <input type="search" placeholder="Search" onChange={e => onSearchTermChanged ? onSearchTermChanged(e.target.value) : () => {}} />
+        <input type="search" placeholder="Search" onChange={e => onSearchTermChanged ? onSearchTermChanged(e.target.value) : () => { }} />
         <ul className="results">
           {searchResults}
         </ul>
