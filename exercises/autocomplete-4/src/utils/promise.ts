@@ -4,7 +4,7 @@
  * @param {any} x value to check
  * @returns {boolean} true if the value is found to be a promise
  */
-export function isPromise(x: any) {
+export function isPromise(x: any): x is Promise<any> {
   return x && typeof x.then === 'function';
 }
 
